@@ -159,6 +159,3 @@ class applicartion(models.Model):
   statusApplicartion = models.ForeignKey(statusApplicartion, on_delete = models.CASCADE)
   user = models.ForeignKey(user, on_delete = models.CASCADE)
   processStageHistory = models.ForeignKey(processStageHistory, on_delete = models.CASCADE)
-
-  
-
