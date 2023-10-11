@@ -1,0 +1,2 @@
+class createProcessStageHistory():
+    pass
