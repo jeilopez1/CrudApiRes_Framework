@@ -11,3 +11,8 @@ class applicartionSerializer(serializers.ModelSerializer):
         model = applicartion
         fields= ('datetimeStartapplicartion','datetimeFinalapplicartion','routePracticeProject','routeWorkGuide',
                  'typePractice','routeAcceptancedocument','routeContigencyPlan')
+        
+class academicPeriodSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = academicPeriod
+        fields='__all__'
