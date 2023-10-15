@@ -8,6 +8,7 @@ router = routers.SimpleRouter()
 
 urlpatterns = [
     path("api/", ApiViewRequest.as_view(), name="API")
+    
 ]
 
 # router.register('api/', ApiViewRequest.as_view(), 'applicartion' )

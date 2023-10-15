@@ -1,4 +1,13 @@
 from django.db import models
+from django.contrib.auth.models import Permission
+from django.contrib.contenttypes.models import ContentType
+from django.db import models
+
+class CRUDPermission(models.Model):
+    class Meta:
+        permissions = [
+            ("can_CRUD", "Can perform CRUD operations"),
+        ]
 
 
 class statusSubject(models.Model):
