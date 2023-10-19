@@ -17,24 +17,18 @@ class statusSubject(models.Model):
   def __str__(self) -> str:
     return str(self.typeStatusSubject)
 
-class statusAcademicProgram(models.Model):
-  typeStatusAcademicProgram = models.CharField(max_length = 100)
-  descriptionStatusAcademicProgram = models.CharField(max_length = 200)
+class statusUnit(models.Model):
+  typeStatusunit = models.CharField(max_length = 100)
+  descriptionStatusunit = models.CharField(max_length = 200)
 
   def __str__(self) -> str:
-    return str(self.typeStatusAcademicProgram)
-
-class statusFaculty(models.Model):
-  typeStatusFaculty = models.CharField(max_length = 100)
-  descriptionStatusFacult = models.CharField(max_length = 200)
-  def __str__(self) -> str:
-    return str(self.typeStatusFaculty)
+    return str(self.typeStatusunit)
   
-class faculty(models.Model):
-  nameFaculty = models.CharField(max_length = 100)
-  statusFaculty = models.ForeignKey(statusFaculty,on_delete = models.CASCADE)
+class typeUnit(models.Model):
+  nameType = models.CharField(max_length = 70)
+  descriptionTypeUnit = models.CharField(max_length = 500)
   def __str__(self) -> str:
-    return str(self.nameFaculty)
+    return str(self.nameType)
   
 class studyModality(models.Model):
   studyModality = models.CharField(max_length = 100)
@@ -44,22 +38,30 @@ class studyModality(models.Model):
 
 class educationLevel(models.Model):
   educationLevel = models.CharField(max_length = 100)
-  descriptionEducationLevel = models.CharField(max_length = 200)
+  descriptionEducationLevel = models.CharField(max_length = 500)
   def __str__(self) -> str:
     return str(self.educationLevel)
   
-class academicProgram(models.Model):
-  nameAcademicProgram = models.CharField(max_length = 100)
-  studyModality = models.ForeignKey(studyModality,on_delete = models.CASCADE)
-  educationLevel = models.ForeignKey(educationLevel,on_delete = models.CASCADE)
-  statusAcademicProgram = models.ForeignKey(statusAcademicProgram,on_delete = models.CASCADE)
-  faculty = models.ForeignKey(faculty,on_delete = models.CASCADE)
-  def __str__(self) -> str:
-    return str(self.nameAcademicProgram)
+class unit(models.Model):
+    nameunit = models.CharField(max_length=100)
+    ancestor = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True)
+    descriptionUnit = models.CharField(max_length=500)
+    studyModality = models.ForeignKey(studyModality, on_delete=models.CASCADE)
+    educationLevel = models.ForeignKey(educationLevel, on_delete=models.CASCADE)
+    statusUnit = models.ForeignKey(statusUnit, on_delete=models.CASCADE)
+    typeUnit = models.ForeignKey(typeUnit, on_delete=models.CASCADE)
+
+    def get_ancestor(self):
+        if self.ancestor is None:
+            return self
+        else:
+            return self.ancestor.get_ancestor()
+    def __str__(self) -> str:
+      return str(self.nameunit)
 
 class subject(models.Model):
   nameSubject = models.CharField(max_length = 100)
-  academicProgram = models.ForeignKey(academicProgram,on_delete = models.CASCADE)
+  unit = models.ForeignKey(unit,on_delete = models.CASCADE)
   statusSubject = models.ForeignKey(statusSubject,on_delete = models.CASCADE)
   def __str__(self) -> str:
     return str(self.nameSubject)
@@ -155,16 +157,30 @@ class processStageHistory(models.Model):
   datetimeUpdateProcess = models.DateTimeField(null = False)
   user = models.ForeignKey(user, on_delete = models.CASCADE)
   processStage = models.ForeignKey(processStage, on_delete = models.CASCADE)
+  justification = models.CharField(max_length = 500)
+
 
 class applicartion(models.Model):
   datetimeStartapplicartion = models.DateTimeField(null = False)
   datetimeFinalapplicartion = models.DateTimeField(null = False)
-  routePracticeProject = models.CharField(max_length = 500)
-  routeWorkGuide = models.CharField(max_length = 500)
+  routePracticeProject = models.FileField(upload_to='files/projects/')
+  routeWorkGuide = models.FileField(upload_to='files/workGuide/')
   typePractice = models.CharField(max_length = 50)
-  routeAcceptancedocument = models.CharField(max_length = 500)
-  routeContigencyPlan = models.CharField(max_length = 500)
+  routeAcceptancedocument = models.FileField(upload_to='files/acceptanceDocument/')
+  routeContigencyPlan = models.FileField(upload_to='files/contingencyPlan/')
   academicPeriod = models.ForeignKey(academicPeriod, on_delete = models.CASCADE)
   statusApplicartion = models.ForeignKey(statusApplicartion, on_delete = models.CASCADE)
   user = models.ForeignKey(user, on_delete = models.CASCADE)
   processStageHistory = models.ForeignKey(processStageHistory, on_delete = models.CASCADE)
+
+class practiceAssistants(models.Model):
+  datetimeConfirmation = models.DateTimeField(null = False)
+  nameEPS = models.CharField(max_length = 50)
+  certificateEPS = models.FileField(upload_to='files/certificatesEPS/')
+  applicartion = models.ForeignKey(applicartion, on_delete = models.CASCADE)
+  requestInvitaction = models.ForeignKey(requestInvitaction, on_delete = models.CASCADE)
+
+class headUnit(models.Model):
+  datetimeCreate = models.DateTimeField(null = False)
+  unit = models.ForeignKey(unit, on_delete = models.CASCADE)
+  user = models.ForeignKey(user, on_delete = models.CASCADE)
