@@ -94,6 +94,8 @@ class userSubject(models.Model):
   updateDate = models.DateTimeField(null = False)
   user = models.ForeignKey(user,on_delete = models.CASCADE)
   subject = models.ForeignKey(subject,on_delete = models.CASCADE)
+  def __str__(self) -> str:
+    return str(self.user)
 
 class role(models.Model):
   typeRole = models.CharField(max_length = 150)
@@ -106,6 +108,8 @@ class userRole(models.Model):
   finaleDate = models.DateTimeField(null = False)
   role = models.ForeignKey(role,on_delete = models.CASCADE)
   user = models.ForeignKey(user,on_delete = models.CASCADE)
+  def __str__(self) -> str:
+    return str(self.user)
 
 class userFunction(models.Model):
   userFunction = models.CharField(max_length = 50)
@@ -149,9 +153,11 @@ class statusApplicartion(models.Model):
   
 class processStage(models.Model):
   nameProcessStage = models.CharField(max_length = 60)
-  descriptionProcessStage = models.CharField(max_length = 60)
+  descriptionProcessStage = models.CharField(max_length = 500)
   backProcessStage = models.CharField(max_length = 60)
   nextProcessStage = models.CharField(max_length = 60)
+  def __str__(self) -> str:
+    return str(self.nameProcessStage)
 
 class processStageHistory(models.Model):
   datetimeUpdateProcess = models.DateTimeField(null = False)
