@@ -1,3 +1,5 @@
+import os
+
 """
 Django settings for drfsimplecrud project.
 
@@ -43,6 +45,11 @@ INSTALLED_APPS = [
 
 
 ]
+
+MEDIA_URL = ''
+MEDIA_ROOT = os.path.join(BASE_DIR, './practicasAcademicas/files')
+
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

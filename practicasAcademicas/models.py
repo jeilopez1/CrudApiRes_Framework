@@ -95,18 +95,18 @@ class userSubject(models.Model):
   user = models.ForeignKey(user,on_delete = models.CASCADE)
   subject = models.ForeignKey(subject,on_delete = models.CASCADE)
   def __str__(self) -> str:
-    return str(self.user)
+    return str(f'{self.user} - {self.subject}')
 
-class role(models.Model):
-  typeRole = models.CharField(max_length = 150)
-  descriptionRole = models.CharField(max_length = 200)
+class roleAcademic(models.Model):
+  typeRoleAcademic = models.CharField(max_length = 150)
+  descriptionRoleAcademic = models.CharField(max_length = 200)
   def __str__(self) -> str:
-    return str(self.typeRole)
+    return str(self.typeRoleAcademic)
 
-class userRole(models.Model):
+class userRoleAcademic(models.Model):
   startDate = models.DateTimeField(null = False)
   finaleDate = models.DateTimeField(null = False)
-  role = models.ForeignKey(role,on_delete = models.CASCADE)
+  roleAcademic = models.ForeignKey(roleAcademic,on_delete = models.CASCADE)
   user = models.ForeignKey(user,on_delete = models.CASCADE)
   def __str__(self) -> str:
     return str(self.user)
@@ -164,20 +164,25 @@ class processStageHistory(models.Model):
   user = models.ForeignKey(user, on_delete = models.CASCADE)
   processStage = models.ForeignKey(processStage, on_delete = models.CASCADE)
   justification = models.CharField(max_length = 500)
-
+  def __str__(self) -> str:
+    return str(self.processStage)
 
 class applicartion(models.Model):
   datetimeStartapplicartion = models.DateTimeField(null = False)
   datetimeFinalapplicartion = models.DateTimeField(null = False)
-  routePracticeProject = models.FileField(upload_to='files/projects/')
-  routeWorkGuide = models.FileField(upload_to='files/workGuide/')
+  routePracticeProject = models.FileField(upload_to='projects/',db_index=True)
+  routeWorkGuide = models.FileField(upload_to='workGuide/',db_index=True)
   typePractice = models.CharField(max_length = 50)
-  routeAcceptancedocument = models.FileField(upload_to='files/acceptanceDocument/')
-  routeContigencyPlan = models.FileField(upload_to='files/contingencyPlan/')
+  routeAcceptancedocument = models.FileField(upload_to='acceptanceDocument/')
+  routeContigencyPlan = models.FileField(upload_to='contingencyPlan/')
   academicPeriod = models.ForeignKey(academicPeriod, on_delete = models.CASCADE)
   statusApplicartion = models.ForeignKey(statusApplicartion, on_delete = models.CASCADE)
   user = models.ForeignKey(user, on_delete = models.CASCADE)
   processStageHistory = models.ForeignKey(processStageHistory, on_delete = models.CASCADE)
+  def __str__(self) -> str:
+    return str(f'{self.user} - {self.processStageHistory}')
+
+
 
 class practiceAssistants(models.Model):
   datetimeConfirmation = models.DateTimeField(null = False)
@@ -186,7 +191,16 @@ class practiceAssistants(models.Model):
   applicartion = models.ForeignKey(applicartion, on_delete = models.CASCADE)
   requestInvitaction = models.ForeignKey(requestInvitaction, on_delete = models.CASCADE)
 
-class headUnit(models.Model):
+class workerRole(models.Model):
+  nameWorkerRole = models.CharField(max_length = 50)
+  DescriptionWorkerRole = models.CharField(max_length = 500)
+  def __str__(self) -> str:
+    return str(self.nameWorkerRole)
+
+class workerUnit(models.Model):
   datetimeCreate = models.DateTimeField(null = False)
   unit = models.ForeignKey(unit, on_delete = models.CASCADE)
   user = models.ForeignKey(user, on_delete = models.CASCADE)
+  workerRole = models.ForeignKey(workerRole, on_delete = models.CASCADE)
+  def __str__(self) -> str:
+    return f"{self.user} - {self.workerRole}"
