@@ -166,6 +166,14 @@ class processStageHistory(models.Model):
   justification = models.CharField(max_length = 500)
   def __str__(self) -> str:
     return str(self.processStage)
+  
+class typeAcademicPractice(models.Model):
+  typeAcademicPractice = models.CharField(max_length = 50)
+  DescriptionAcademicPractice = models.CharField(max_length = 500)
+
+  def __str__(self) -> str:
+    return str(self.typeAcademicPractice)
+
 
 class applicartion(models.Model):
   datetimeStartapplicartion = models.DateTimeField(null = False)
@@ -173,12 +181,13 @@ class applicartion(models.Model):
   routePracticeProject = models.FileField(upload_to='projects/',db_index=True)
   routeWorkGuide = models.FileField(upload_to='workGuide/',db_index=True)
   typePractice = models.CharField(max_length = 50)
-  routeAcceptancedocument = models.FileField(upload_to='acceptanceDocument/')
+  routeAcceptancedocument = models.FileField(upload_to='acceptanceDocument/',null=True)
   routeContigencyPlan = models.FileField(upload_to='contingencyPlan/')
   academicPeriod = models.ForeignKey(academicPeriod, on_delete = models.CASCADE)
   statusApplicartion = models.ForeignKey(statusApplicartion, on_delete = models.CASCADE)
   user = models.ForeignKey(user, on_delete = models.CASCADE)
   processStageHistory = models.ForeignKey(processStageHistory, on_delete = models.CASCADE)
+  typeAcademicPractice = models.ForeignKey(typeAcademicPractice, on_delete = models.CASCADE,null = True)
   def __str__(self) -> str:
     return str(f'{self.user} - {self.processStageHistory}')
 

@@ -6,7 +6,7 @@ from practicasAcademicas.serializers import academicPeriodSerializer
 
 class ApiViewRequest(APIView):
     def get(self,request):
-        return Response(BuildApplicartion.CualquierMetodo(), status=status.HTTP_201_CREATED)
+        return Response(BuildApplicartion.CualquierMetodo(self,request), status=status.HTTP_201_CREATED)
 
     def post(self, request):
         return Response(createAcademicPeriod.MethodCreateAcademicPeriod(self,request), status=status.HTTP_201_CREATED)

@@ -9,8 +9,7 @@ class statusSubjectSerializer(serializers.ModelSerializer):
 class applicartionSerializer(serializers.ModelSerializer):
     class Meta:
         model = applicartion
-        fields= ('datetimeStartapplicartion','datetimeFinalapplicartion','routePracticeProject','routeWorkGuide',
-                 'typePractice','routeAcceptancedocument','routeContigencyPlan')
+        fields= '__all__'
         
 class academicPeriodSerializer(serializers.ModelSerializer):
     class Meta:
