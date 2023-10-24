@@ -174,7 +174,6 @@ class typeAcademicPractice(models.Model):
   def __str__(self) -> str:
     return str(self.typeAcademicPractice)
 
-
 class applicartion(models.Model):
   datetimeStartapplicartion = models.DateTimeField(null = False)
   datetimeFinalapplicartion = models.DateTimeField(null = False)
@@ -189,8 +188,6 @@ class applicartion(models.Model):
   typeAcademicPractice = models.ForeignKey(typeAcademicPractice, on_delete = models.CASCADE,null = True)
   def __str__(self) -> str:
     return str(f'{self.user} - {self.processStageHistory}')
-
-
 
 class practiceAssistants(models.Model):
   datetimeConfirmation = models.DateTimeField(null = False)
