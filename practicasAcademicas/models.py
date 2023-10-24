@@ -180,7 +180,6 @@ class applicartion(models.Model):
   datetimeFinalapplicartion = models.DateTimeField(null = False)
   routePracticeProject = models.FileField(upload_to='projects/',db_index=True)
   routeWorkGuide = models.FileField(upload_to='workGuide/',db_index=True)
-  typePractice = models.CharField(max_length = 50)
   routeAcceptancedocument = models.FileField(upload_to='acceptanceDocument/',null=True)
   routeContigencyPlan = models.FileField(upload_to='contingencyPlan/')
   academicPeriod = models.ForeignKey(academicPeriod, on_delete = models.CASCADE)
