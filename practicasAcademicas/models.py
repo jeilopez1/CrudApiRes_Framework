@@ -88,7 +88,7 @@ class user(models.Model):
   typeIdentification = models.ForeignKey(typeIdentification,on_delete = models.CASCADE)
   statusUser = models.ForeignKey(statusUser,on_delete = models.CASCADE)
   def __str__(self) -> str:
-    return str(self.nameUser)
+    return str(f'{self.id} - {self.nameUser}')
 
 class userSubject(models.Model):
   updateDate = models.DateTimeField(null = False)
@@ -121,13 +121,15 @@ class guestGroup(models.Model):
   nameGroup = models.CharField(max_length = 700)
   groupDescription = models.CharField(max_length = 700)
   def __str__(self) -> str:
-    return str(self.nameGroup)
+    return str(self.groupDescription)
 
 class requestInvitaction(models.Model):
   datetimeRequestInvitaction = models.DateTimeField(null = False)
   user = models.ForeignKey(user,on_delete = models.CASCADE)
   userFunction = models.ForeignKey(userFunction,on_delete = models.CASCADE)
   guestGroup = models.ForeignKey(guestGroup,on_delete = models.CASCADE)
+  def __str__(self) -> str:
+    return str(f'{self.user} - {self.guestGroup}')
   
 class notificationRequestInvitaction(models.Model):
   notificationDetail = models.CharField(max_length = 700)

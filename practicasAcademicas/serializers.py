@@ -6,6 +6,16 @@ class PdfSerializer(serializers.Serializer):
     DateTimeStart=serializers.DateTimeField()
     DateTimeFinal=serializers.DateTimeField()
 
+class statusSubjectSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = statusSubject
+        fields= '__all__'
+
+        
+class academicPeriodSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = academicPeriod
+        fields='__all__'
         
 class applicartionSerializer(serializers.Serializer):
     datetimeStartapplicartion = serializers.DateTimeField()
@@ -19,15 +29,7 @@ class applicartionSerializer(serializers.Serializer):
     user = serializers.IntegerField()
     processStageHistory = serializers.IntegerField()
     typeAcademicPractice = serializers.IntegerField()
+    idSubject=serializers.IntegerField()
+    idsExternalGuests = serializers.ListField(child=serializers.IntegerField())
 
 
-class statusSubjectSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = statusSubject
-        fields= '__all__'
-
-        
-class academicPeriodSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = academicPeriod
-        fields='__all__'
