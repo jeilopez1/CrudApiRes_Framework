@@ -2,6 +2,7 @@ from practicasAcademicas.serializers import applicartionSerializer
 from .CreatedApplicartion.AddApplicartion import AddApplicartion
 from .CreatedApplicartion.AddRequestInvitation import AddRequestInvitation
 from .CreatedApplicartion.AddGuestGroup import AddGuestGroup
+from .CreatedApplicartion.NotificationInvitates import NotificationInvitatesEMAIL,NotificationInvitatesSMS
 
 
 class BuildApplicartion():
@@ -12,7 +13,10 @@ class BuildApplicartion():
             idGuestGroup=AddGuestGroup.InsertGuestGroup(self,data)
             AddRequestInvitation.InsertInvitation(self,data,idGuestGroup)
             AddApplicartion.InsertApplicartion(self,data)
-            return "Creado Correctamente"
+            NotificationInvitatesEMAIL(self,data)
+            NotificationInvitatesSMS(self,data)
+
+            return "Creado Correctamente y notificado"
         else:
             return data.errors
 
