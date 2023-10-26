@@ -85,6 +85,8 @@ class user(models.Model):
   lastNameUser = models.CharField(max_length = 100)
   PEGE_ID = models.IntegerField()
   identificationNumber = models.IntegerField()
+  phoneNumber = models.IntegerField()
+  email=models.CharField(max_length = 100)
   typeIdentification = models.ForeignKey(typeIdentification,on_delete = models.CASCADE)
   statusUser = models.ForeignKey(statusUser,on_delete = models.CASCADE)
   def __str__(self) -> str:

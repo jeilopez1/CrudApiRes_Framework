@@ -1,8 +1,7 @@
 from rest_framework.views import APIView
-from .applicartionPractice.createdApplicartion import BuildApplicartion
+from .applicartionPractice.services.createdApplicartion import BuildApplicartion
 from rest_framework.response import Response
 from rest_framework import status
-from practicasAcademicas.serializers import PdfSerializer
 
 
 class ApiViewRequest(APIView):

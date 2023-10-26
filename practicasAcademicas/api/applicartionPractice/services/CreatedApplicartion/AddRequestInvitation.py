@@ -1,4 +1,4 @@
-from practicasAcademicas.models import requestInvitaction,user,userFunction,guestGroup,userSubject,roleAcademic
+from practicasAcademicas.models import requestInvitaction,user,userFunction,guestGroup
 from .FindFK import FindFK
 from django.db.models import Q
 import datetime
