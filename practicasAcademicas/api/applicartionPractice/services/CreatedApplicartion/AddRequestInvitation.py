@@ -18,8 +18,6 @@ class InsertInvitates():
         ObjrequestInvitaction.save()
     return True
 
-
-
 class AddRequestInvitation():
       
       def InsertInvitation(self,data,idGuestGroup):
