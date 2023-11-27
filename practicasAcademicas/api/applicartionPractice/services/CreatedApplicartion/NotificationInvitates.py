@@ -7,19 +7,19 @@ class NotificationInvitatesSMS():
 
 
 class NotificationInvitatesEMAIL():
+    def notificationRequestInvitactionEMAIL(self,emails,subject,text,img):
+        from django.core.mail import send_mass_mail
 
-    def notificationRequestInvitactionEMAIL(self,data):
+        messages=(
+            (),
+            ()
+        )
 
-        """
-        Estimado ##FuncionUsuario##
-        ###Nombre de Usuario###
-        Ha recibido una solicitud de asistencia para la practica ### Nombre de la Practica ### de la Materia ###Nombre de la Asignatura### dirijida por el docente
-        ###Nombre del Docente### Por favor acceda al sistema de informacion Chaira ###Ruta depende de la funcion de usuario### para que revise la solicitud y acepte o 
-        la rechazar
-
-        Atentamente. 
-        Sistema de informacion Misional Chaira modulo de Practicas Academicas. Orgullosamente nuestro
-        
-        """
-
-        return True
+        send_mass_mail(
+            
+            'Ha recibido una solicitud de asistencia para la practica',
+            'Prueba',
+            'yei.lopez@udla.edu.co',  # Remitente (debe ser una cuenta de Office 365 configurada)
+            ['yeissonllespinosa@hotmail.com'],  # Lista de destinatarios
+            fail_silently=False,  # Cambia a True para suprimir errores (no recomendado)
+            )

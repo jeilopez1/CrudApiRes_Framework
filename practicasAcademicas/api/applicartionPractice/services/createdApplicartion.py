@@ -9,12 +9,14 @@ class BuildApplicartion():
 
     def constructApplication(self,request):
         data=applicartionSerializer(data=request.data)
+        emails=[]
         if data.is_valid():
             idGuestGroup=AddGuestGroup.InsertGuestGroup(self,data)
             AddRequestInvitation.InsertInvitation(self,data,idGuestGroup)
             AddApplicartion.InsertApplicartion(self,data)
-            NotificationInvitatesEMAIL(self,data)
-            NotificationInvitatesSMS(self,data)
+
+            NotificationInvitatesEMAIL.notificationRequestInvitactionEMAIL(self,emails)
+            # NotificationInvitatesSMS(self,data)
 
             return "Creado Correctamente y notificado"
         else:
