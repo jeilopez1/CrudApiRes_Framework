@@ -22,7 +22,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.office365.com'  # Servidor SMTP de Office 365
 EMAIL_PORT = 587  # Puerto típico para TLS
 EMAIL_HOST_USER = 'yei.lopez@udla.edu.co'  # Tu dirección de correo de Office 365
-EMAIL_HOST_PASSWORD = '321mnb'  # Contraseña de tu cuenta de Office 365
+EMAIL_HOST_PASSWORD = ''  # Contraseña de tu cuenta de Office 365
 EMAIL_USE_TLS = True  # Habilitar TLS para seguridad
 
 
