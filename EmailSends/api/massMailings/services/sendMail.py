@@ -16,14 +16,11 @@ class SendMail():
 
     def SendEMAIL(self,data):
         from django.core.mail import send_mass_mail
-        sublistas = SendMail.dividir_lista_por_999_elementos(data.validated_data['correos_csv'])
-        messages=()
-        if all(isinstance(sublista, list) for sublista in sublistas):
-            for x in sublistas:
-                messages +=(data["asunto"].value, data["cuerpo"].value,'yei.lopez@udla.edu.co',x)
+        messages=[]
 
-        else:
-            messages +=(data["asunto"].value, data["cuerpo"].value,'yei.lopez@udla.edu.co',sublistas)
+        for x in data.validated_data['correos_csv']:
+            message=(data["asunto"].value, data["cuerpo"].value,'yei.lopez@udla.edu.co',[x])
+            messages.append(message)
 
-
-        # send_mass_mail(messages)
+        print(messages)
+        send_mass_mail(messages)
