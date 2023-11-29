@@ -4,14 +4,13 @@ from EmailSends.serializers import CorreoCSVSerializer
 class BuildSendMassMailings():
 
     def constructSendMassMailings(self,request):
-        data=CorreoCSVSerializer(data=request.data)
+        data = CorreoCSVSerializer(data=request.data)
         if data.is_valid():
-            emails=[]
             SendMail.SendEMAIL(self,data)
             return "Creado Correctamente y notificado"
         else:
-            return data.errors
-        
+            errores = data.errors  # Si los datos no son válidos, puedes manejar los errores aquí
+
 
         
     
